@@ -6,13 +6,13 @@ import {
   Card,
   CardMedia,
   CardContent,
-  CardActions,
-  CircularProgress,
+  CardActions
 } from "@mui/material";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useProperties } from "../hooks/useProperties";
 import PrimaryButton from "../components/PrimaryButton";
 import OutlinedButton from "../components/OutlinedButton";
+import LoaderLottie from "../components/LoaderLottie";
 
 interface CustomField {
   key: string;
@@ -53,17 +53,15 @@ const Properties = () => {
       maximumFractionDigits: 0,
     });
 
+      if (loading) return <LoaderLottie />;
+
   return (
     <Container sx={{ py: 8 }}>
       <Typography variant="h4" fontWeight="bold" gutterBottom>
         Propiedades disponibles
       </Typography>
 
-      {loading ? (
-        <Box display="flex" justifyContent="center" py={10}>
-          <CircularProgress />
-        </Box>
-      ) : filteredProperties.length === 0 ? (
+      {filteredProperties.length === 0 ? (
         <Box textAlign="center" mt={6}>
           <Typography variant="body1" gutterBottom>
             No se encontraron propiedades con esos filtros.

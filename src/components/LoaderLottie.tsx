@@ -3,7 +3,6 @@ import Lottie from "lottie-react";
 import loadingAnimation from "../assets/lottie/loadingAnimation.json";
 
 const LoaderLottie = () => {
-    console.log("loadingAnimation", loadingAnimation);
   return (
     <Box
       display="flex"

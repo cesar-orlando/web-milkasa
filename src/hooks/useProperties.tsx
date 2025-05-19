@@ -19,12 +19,14 @@ export const useProperties = () => {
   useEffect(() => {
     const fetch = async () => {
       try {
-        const res = await axios.get('http://localhost:3001/api/records/propiedades');
+        const res = await axios.get('https://api.milkasa.virtualvoices.com.mx/api/records/propiedades');
         setProperties(res.data || []);
       } catch (err) {
         console.error('Error loading properties:', err);
       } finally {
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
       }
     };
 

@@ -20,6 +20,7 @@ import { useState } from "react";
 
 import { useProperties } from "../hooks/useProperties";
 import OutlinedButton from "../components/OutlinedButton";
+import LoaderLottie from "../components/LoaderLottie";
 
 const Home = () => {
   const { properties, loading } = useProperties();
@@ -35,6 +36,8 @@ const Home = () => {
       currency: "MXN",
       maximumFractionDigits: 0,
     });
+
+  if (loading) return <LoaderLottie />;
 
   return (
     <Box>
