@@ -16,12 +16,67 @@ const Navbar = () => (
         </Typography>
       </Box>
 
-      <Box>
-        <Button color="inherit" component={RouterLink} to="/">Inicio</Button>
-        {/* <Button color="inherit" component={RouterLink} to="/nosotros">Nosotros</Button> */}
-        <Button color="inherit" component={RouterLink} to="/propiedades">Propiedades</Button>
-        {/* <Button color="inherit" component={RouterLink} to="/servicios">Servicios</Button> */}
-        {/* <Button color="inherit" component={RouterLink} to="/contacto">Contacto</Button> */}
+      <Box display="flex" gap={1}>
+        <Button 
+          color="inherit" 
+          component={RouterLink} 
+          to="/"
+          sx={{ 
+            color: '#fff', 
+            '&:hover': { color: '#ba923f' },
+            fontWeight: 'bold' 
+          }}
+        >
+          Inicio
+        </Button>
+        <Button 
+          color="inherit" 
+          component={RouterLink} 
+          to="/propiedades"
+          sx={{ 
+            color: '#fff', 
+            '&:hover': { color: '#ba923f' },
+            fontWeight: 'bold' 
+          }}
+        >
+          Propiedades
+        </Button>
+        <Button 
+          color="inherit" 
+          component={RouterLink} 
+          to="/servicios"
+          sx={{ 
+            color: '#fff', 
+            '&:hover': { color: '#ba923f' },
+            fontWeight: 'bold' 
+          }}
+        >
+          Servicios
+        </Button>
+        <Button 
+          color="inherit" 
+          component={RouterLink} 
+          to="/nosotros"
+          sx={{ 
+            color: '#fff', 
+            '&:hover': { color: '#ba923f' },
+            fontWeight: 'bold' 
+          }}
+        >
+          Conócenos
+        </Button>
+        <Button 
+          color="inherit" 
+          component={RouterLink} 
+          to="/contacto"
+          sx={{ 
+            color: '#fff', 
+            '&:hover': { color: '#ba923f' },
+            fontWeight: 'bold' 
+          }}
+        >
+          Contacto
+        </Button>
       </Box>
     </Toolbar>
   </AppBar>

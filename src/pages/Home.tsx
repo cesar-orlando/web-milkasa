@@ -40,7 +40,8 @@ const Home = () => {
   if (loading) return <LoaderLottie />;
 
   return (
-    <Box>
+    <Container maxWidth={false} disableGutters>
+      <Box>
       {/* Hero Section */}
       <Box display="flex" flexDirection={{ xs: "column", md: "row" }}>
         <Box flex={1} p={6}>
@@ -188,7 +189,8 @@ const Home = () => {
           })}
         </Box>
       </Container>
-    </Box>
+      </Box>
+    </Container>
   );
 };
 
