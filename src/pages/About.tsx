@@ -5,444 +5,330 @@ import {
   Grid, 
   Card, 
   CardContent, 
-  Avatar, 
   Button, 
   TextField, 
   Paper,
   Divider,
-  IconButton
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText
 } from '@mui/material';
 import { 
   Email, 
-  WhatsApp, 
   Phone, 
-  LocationOn 
+  LocationOn,
+  Business,
+  People,
+  CheckCircle,
+  AccountBalance,
+  StarRate
 } from '@mui/icons-material';
 
 const About = () => {
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: '#f8f9fa' }}>
-      <Container maxWidth="lg" sx={{ py: 6 }}>
+    <Box sx={{ bgcolor: '#ffffff', minHeight: '100vh' }}>
+      <Container maxWidth="lg" sx={{ py: 4 }}>
         
-        {/* Hero Section */}
-        <Box sx={{ textAlign: 'center', mb: 8 }}>
+        {/* Header */}
+        <Box sx={{ textAlign: 'center', mb: 6 }}>
           <Typography 
-            variant="h2" 
+            variant="h3" 
             component="h1" 
             sx={{ 
               fontWeight: 'bold', 
-              color: '#2c3e50', 
-              mb: 2,
-              fontSize: { xs: '2rem', md: '3rem' }
+              color: '#1976d2', 
+              mb: 2
             }}
           >
-            Conócenos
+            CONÓCENOS
           </Typography>
           <Typography 
-            variant="h5" 
+            variant="h6" 
             sx={{ 
-              color: '#7f8c8d', 
-              fontWeight: 300,
-              maxWidth: 600,
+              color: '#666', 
+              fontWeight: 400,
+              maxWidth: 800,
               mx: 'auto'
             }}
           >
-            Conoce más sobre nuestra empresa y el equipo que hace posible tus sueños inmobiliarios
+            Somos una empresa inmobiliaria con más de 10 años de experiencia en el mercado, 
+            dedicada a brindar servicios de calidad y confianza a nuestros clientes.
           </Typography>
         </Box>
 
-        {/* Nuestra Razón de Ser */}
-        <Box sx={{ mb: 8 }}>
-          <Typography 
-            variant="h3" 
-            component="h2" 
-            sx={{ 
-              fontWeight: 'bold', 
-              color: '#2c3e50', 
-              mb: 4, 
-              textAlign: 'center',
-              fontSize: { xs: '1.8rem', md: '2.5rem' }
-            }}
-          >
-            Nuestra razón de ser
+        {/* Quiénes Somos */}
+        <Grid container spacing={4} sx={{ mb: 6 }}>
+          <Grid item xs={12} md={8}>
+            <Paper elevation={2} sx={{ p: 4 }}>
+              <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#1976d2', mb: 3 }}>
+                ¿Quiénes Somos?
+              </Typography>
+              <Typography variant="body1" sx={{ lineHeight: 1.8, mb: 3, fontSize: '1.1rem' }}>
+                <strong>Grupo Milkasa</strong> es una empresa inmobiliaria establecida en León, Guanajuato, 
+                con más de una década de experiencia en el sector inmobiliario mexicano. Nos especializamos 
+                en la compra, venta, renta y administración de propiedades residenciales y comerciales.
+              </Typography>
+              <Typography variant="body1" sx={{ lineHeight: 1.8, mb: 3, fontSize: '1.1rem' }}>
+                Nuestro compromiso es proporcionar un servicio integral y personalizado, acompañando a 
+                nuestros clientes en cada etapa del proceso inmobiliario, desde la evaluación inicial 
+                hasta la conclusión exitosa de la operación.
+              </Typography>
+              <Typography variant="body1" sx={{ lineHeight: 1.8, fontSize: '1.1rem' }}>
+                Con un equipo de profesionales altamente capacitados y certificados, garantizamos 
+                transparencia, seguridad jurídica y la mejor asesoría para maximizar el valor de 
+                su inversión inmobiliaria.
+              </Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <Paper elevation={2} sx={{ p: 3, bgcolor: '#f5f5f5' }}>
+              <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 2, color: '#1976d2' }}>
+                Datos de la Empresa
+              </Typography>
+              <List dense>
+                <ListItem>
+                  <ListItemIcon>
+                    <Business color="primary" />
+                  </ListItemIcon>
+                  <ListItemText 
+                    primary="Años de experiencia" 
+                    secondary="Más de 10 años"
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon>
+                    <LocationOn color="primary" />
+                  </ListItemIcon>
+                  <ListItemText 
+                    primary="Ubicación" 
+                    secondary="León, Guanajuato"
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon>
+                    <People color="primary" />
+                  </ListItemIcon>
+                  <ListItemText 
+                    primary="Equipo" 
+                    secondary="Profesionales certificados"
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon>
+                    <AccountBalance color="primary" />
+                  </ListItemIcon>
+                  <ListItemText 
+                    primary="Servicios" 
+                    secondary="Venta, renta, administración"
+                  />
+                </ListItem>
+              </List>
+            </Paper>
+          </Grid>
+        </Grid>
+
+        {/* Servicios */}
+        <Box sx={{ mb: 6 }}>
+          <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#1976d2', mb: 4, textAlign: 'center' }}>
+            Nuestros Servicios
           </Typography>
-          <Paper elevation={3} sx={{ p: 4, borderRadius: 3 }}>
-            <Typography 
-              variant="body1" 
-              sx={{ 
-                fontSize: '1.1rem', 
-                lineHeight: 1.8, 
-                color: '#34495e',
-                mb: 3
-              }}
-            >
-              <strong>Grupo Milkasa</strong> ofrece asesoría a través de su personal capacitado para guiarlo, 
-              en la selección de la mejor opción de inversión en inmuebles, acompañando lo de inicio a fin 
-              de la operación, hasta concluir el proceso de adquisición de su patrimonio.
-            </Typography>
-            <Typography 
-              variant="body1" 
-              sx={{ 
-                fontSize: '1.1rem', 
-                lineHeight: 1.8, 
-                color: '#34495e',
-                mb: 3
-              }}
-            >
-              En <strong>Grupo Milkasa</strong> tenemos una trayectoria con más de 10 años de experiencia 
-              en el ramo. Contamos con diversos servicios inmobiliarios para empresas y particulares atendiendo 
-              sus necesidades, ofreciendo un trato personal que le brinda seguridad, tranquilidad y conformidad, 
-              dejando una buena experiencia con nosotros.
-            </Typography>
-            <Typography 
-              variant="h6" 
-              sx={{ 
-                fontWeight: 'bold', 
-                color: '#e74c3c',
-                textAlign: 'center',
-                fontSize: '1.3rem'
-              }}
-            >
-              Estamos para ayudarte
-            </Typography>
-          </Paper>
-        </Box>
-
-        {/* Nuestro Equipo */}
-        <Box sx={{ mb: 8 }}>
-          <Typography 
-            variant="h3" 
-            component="h2" 
-            sx={{ 
-              fontWeight: 'bold', 
-              color: '#2c3e50', 
-              mb: 4, 
-              textAlign: 'center',
-              fontSize: { xs: '1.8rem', md: '2.5rem' }
-            }}
-          >
-            Nuestro equipo
-          </Typography>
-          <Grid container spacing={4}>
-            {/* Miembro 1 */}
-            <Grid item xs={12} md={4}>
-              <Card sx={{ height: '100%', textAlign: 'center', borderRadius: 3, boxShadow: 3 }}>
-                <CardContent sx={{ p: 4 }}>
-                  <Avatar 
-                    sx={{ 
-                      width: 100, 
-                      height: 100, 
-                      mx: 'auto', 
-                      mb: 2,
-                      bgcolor: '#3498db'
-                    }}
-                  >
-                    JD
-                  </Avatar>
-                  <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>
-                    Juan Pérez
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                    Co-Fundador
-                  </Typography>
-                  <Typography variant="body2" sx={{ mb: 2 }}>
-                    correo@grupomilkasa.com
-                  </Typography>
-                  <Typography variant="body2" sx={{ mb: 3 }}>
-                    (477) 123-4567
-                  </Typography>
-                  <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
-                    <IconButton color="primary">
-                      <Email />
-                    </IconButton>
-                    <IconButton color="success">
-                      <WhatsApp />
-                    </IconButton>
-                  </Box>
-                </CardContent>
-              </Card>
-            </Grid>
-
-            {/* Miembro 2 */}
-            <Grid item xs={12} md={4}>
-              <Card sx={{ height: '100%', textAlign: 'center', borderRadius: 3, boxShadow: 3 }}>
-                <CardContent sx={{ p: 4 }}>
-                  <Avatar 
-                    sx={{ 
-                      width: 100, 
-                      height: 100, 
-                      mx: 'auto', 
-                      mb: 2,
-                      bgcolor: '#e74c3c'
-                    }}
-                  >
-                    MM
-                  </Avatar>
-                  <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>
-                    María Martínez
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                    CEO
-                  </Typography>
-                  <Typography variant="body2" sx={{ mb: 2 }}>
-                    maria@grupomilkasa.com
-                  </Typography>
-                  <Typography variant="body2" sx={{ mb: 3 }}>
-                    (477) 449-5983
-                  </Typography>
-                  <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
-                    <IconButton color="primary">
-                      <Email />
-                    </IconButton>
-                    <IconButton color="success">
-                      <WhatsApp />
-                    </IconButton>
-                  </Box>
-                </CardContent>
-              </Card>
-            </Grid>
-
-            {/* Miembro 3 */}
-            <Grid item xs={12} md={4}>
-              <Card sx={{ height: '100%', textAlign: 'center', borderRadius: 3, boxShadow: 3 }}>
-                <CardContent sx={{ p: 4 }}>
-                  <Avatar 
-                    sx={{ 
-                      width: 100, 
-                      height: 100, 
-                      mx: 'auto', 
-                      mb: 2,
-                      bgcolor: '#27ae60'
-                    }}
-                  >
-                    CL
-                  </Avatar>
-                  <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>
-                    Carlos López
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                    Director Ejecutivo
-                  </Typography>
-                  <Typography variant="body2" sx={{ mb: 2 }}>
-                    carlos@grupomilkasa.com
-                  </Typography>
-                  <Typography variant="body2" sx={{ mb: 3 }}>
-                    (477) 123-4567
-                  </Typography>
-                  <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
-                    <IconButton color="primary">
-                      <Email />
-                    </IconButton>
-                    <IconButton color="success">
-                      <WhatsApp />
-                    </IconButton>
-                  </Box>
-                </CardContent>
-              </Card>
-            </Grid>
+          <Grid container spacing={3}>
+            {[
+              {
+                title: "Venta de Propiedades",
+                description: "Asesoría completa en la venta de casas, departamentos, terrenos y propiedades comerciales con el mejor precio del mercado."
+              },
+              {
+                title: "Renta de Inmuebles",
+                description: "Administración y renta de propiedades residenciales y comerciales con garantía de pago puntual y mantenimiento."
+              },
+              {
+                title: "Valuación Profesional",
+                description: "Avalúos comerciales y fiscales realizados por profesionales certificados para determinar el valor real de su propiedad."
+              },
+              {
+                title: "Asesoría Legal",
+                description: "Acompañamiento jurídico completo en todos los trámites legales y documentación necesaria para su operación."
+              },
+              {
+                title: "Inversión Inmobiliaria",
+                description: "Consultoria especializada para inversionistas que buscan las mejores oportunidades en el mercado inmobiliario."
+              },
+              {
+                title: "Administración",
+                description: "Gestión integral de propiedades en renta incluyendo cobranza, mantenimiento y relación con inquilinos."
+              }
+            ].map((service, index) => (
+              <Grid item xs={12} md={6} key={index}>
+                <Card elevation={1} sx={{ height: '100%', '&:hover': { elevation: 3 } }}>
+                  <CardContent>
+                    <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 2, color: '#1976d2' }}>
+                      {service.title}
+                    </Typography>
+                    <Typography variant="body2" sx={{ lineHeight: 1.6 }}>
+                      {service.description}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
           </Grid>
         </Box>
 
-        {/* ¿Qué nos define? */}
-        <Box sx={{ mb: 8 }}>
-          <Typography 
-            variant="h3" 
-            component="h2" 
-            sx={{ 
-              fontWeight: 'bold', 
-              color: '#2c3e50', 
-              mb: 4, 
-              textAlign: 'center',
-              fontSize: { xs: '1.8rem', md: '2.5rem' }
-            }}
-          >
-            ¿Qué nos define?
+        {/* Misión y Visión */}
+        <Grid container spacing={4} sx={{ mb: 6 }}>
+          <Grid item xs={12} md={6}>
+            <Paper elevation={2} sx={{ p: 4, height: '100%' }}>
+              <Typography variant="h5" sx={{ fontWeight: 'bold', color: '#1976d2', mb: 3 }}>
+                Nuestra Misión
+              </Typography>
+              <Typography variant="body1" sx={{ lineHeight: 1.8 }}>
+                Brindar servicios inmobiliarios de la más alta calidad, ofreciendo soluciones integrales 
+                y personalizadas que superen las expectativas de nuestros clientes, garantizando transparencia, 
+                seguridad y el máximo valor en cada transacción inmobiliaria.
+              </Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Paper elevation={2} sx={{ p: 4, height: '100%' }}>
+              <Typography variant="h5" sx={{ fontWeight: 'bold', color: '#1976d2', mb: 3 }}>
+                Nuestra Visión
+              </Typography>
+              <Typography variant="body1" sx={{ lineHeight: 1.8 }}>
+                Ser la empresa inmobiliaria líder en el Bajío mexicano, reconocida por nuestra excelencia 
+                en el servicio, innovación tecnológica y compromiso con el desarrollo del sector inmobiliario, 
+                contribuyendo al crecimiento económico de nuestra región.
+              </Typography>
+            </Paper>
+          </Grid>
+        </Grid>
+
+        {/* Valores */}
+        <Box sx={{ mb: 6 }}>
+          <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#1976d2', mb: 4, textAlign: 'center' }}>
+            Nuestros Valores
           </Typography>
-          <Grid container spacing={4}>
-            {/* Misión */}
-            <Grid item xs={12} md={4}>
-              <Paper elevation={3} sx={{ p: 4, height: '100%', borderRadius: 3 }}>
-                <Typography 
-                  variant="h5" 
-                  sx={{ 
-                    fontWeight: 'bold', 
-                    color: '#3498db', 
-                    mb: 3,
-                    textAlign: 'center'
-                  }}
-                >
-                  Misión
-                </Typography>
-                <Typography 
-                  variant="body1" 
-                  sx={{ 
-                    lineHeight: 1.6, 
-                    color: '#34495e',
-                    textAlign: 'justify'
-                  }}
-                >
-                  Darles a nuestros clientes la tranquilidad, confianza, comodidad y seguridad 
-                  así como el beneficio a sus intereses y la mejor inversión de su patrimonio, 
-                  acompañándolos de principio a fin en el proceso de comercialización a su entera satisfacción.
-                </Typography>
-              </Paper>
-            </Grid>
-
-            {/* Visión */}
-            <Grid item xs={12} md={4}>
-              <Paper elevation={3} sx={{ p: 4, height: '100%', borderRadius: 3 }}>
-                <Typography 
-                  variant="h5" 
-                  sx={{ 
-                    fontWeight: 'bold', 
-                    color: '#e74c3c', 
-                    mb: 3,
-                    textAlign: 'center'
-                  }}
-                >
-                  Visión
-                </Typography>
-                <Typography 
-                  variant="body1" 
-                  sx={{ 
-                    lineHeight: 1.6, 
-                    color: '#34495e',
-                    textAlign: 'justify'
-                  }}
-                >
-                  Superar las expectativas en el ramo inmobiliario, tener un servicio de calidad. 
-                  Vanguardista e innovador, con resultados a niveles competitivos, siendo únicos 
-                  en nuestro servicio, y ser la preferencia de nuestros clientes a nivel nacional e internacional.
-                </Typography>
-              </Paper>
-            </Grid>
-
-            {/* Valores */}
-            <Grid item xs={12} md={4}>
-              <Paper elevation={3} sx={{ p: 4, height: '100%', borderRadius: 3 }}>
-                <Typography 
-                  variant="h5" 
-                  sx={{ 
-                    fontWeight: 'bold', 
-                    color: '#27ae60', 
-                    mb: 3,
-                    textAlign: 'center'
-                  }}
-                >
-                  Valores
-                </Typography>
-                <Typography 
-                  variant="body1" 
-                  sx={{ 
-                    lineHeight: 1.6, 
-                    color: '#34495e',
-                    textAlign: 'center'
-                  }}
-                >
-                  Honestidad • Compromiso • Lealtad • Respeto • Confidencialidad • 
-                  Calidad • Calidez • Confianza • Profesionalismo
-                </Typography>
-              </Paper>
-            </Grid>
+          <Grid container spacing={2}>
+            {[
+              "Honestidad y Transparencia",
+              "Profesionalismo",
+              "Compromiso con el Cliente",
+              "Responsabilidad Social",
+              "Innovación Tecnológica",
+              "Confidencialidad"
+            ].map((value, index) => (
+              <Grid item xs={12} md={4} key={index}>
+                <Box sx={{ display: 'flex', alignItems: 'center', p: 2 }}>
+                  <CheckCircle sx={{ color: '#1976d2', mr: 2 }} />
+                  <Typography variant="body1" sx={{ fontWeight: 500 }}>
+                    {value}
+                  </Typography>
+                </Box>
+              </Grid>
+            ))}
           </Grid>
         </Box>
 
-        {/* Contáctanos */}
-        <Box sx={{ mb: 4 }}>
-          <Typography 
-            variant="h3" 
-            component="h2" 
-            sx={{ 
-              fontWeight: 'bold', 
-              color: '#2c3e50', 
-              mb: 4, 
-              textAlign: 'center',
-              fontSize: { xs: '1.8rem', md: '2.5rem' }
-            }}
-          >
-            Contáctanos
+        {/* Contacto */}
+        <Paper elevation={2} sx={{ p: 4 }}>
+          <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#1976d2', mb: 4, textAlign: 'center' }}>
+            Contacto
           </Typography>
-          <Paper elevation={3} sx={{ p: 4, borderRadius: 3 }}>
-            <Typography 
-              variant="body1" 
-              sx={{ 
-                textAlign: 'center', 
-                mb: 4, 
-                fontSize: '1.1rem',
-                color: '#34495e'
-              }}
-            >
-              Ponte en contacto con nosotros, nos dará mucho gusto atenderte
-            </Typography>
+          <Grid container spacing={4}>
+            <Grid item xs={12} md={6}>
+              <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 3 }}>
+                Información de Contacto
+              </Typography>
+              <Box sx={{ mb: 3 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                  <Phone sx={{ color: '#1976d2', mr: 2 }} />
+                  <Box>
+                    <Typography variant="body1" sx={{ fontWeight: 500 }}>
+                      Teléfonos
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      (477) 449-5983 / (477) 284-9821
+                    </Typography>
+                  </Box>
+                </Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                  <Email sx={{ color: '#1976d2', mr: 2 }} />
+                  <Box>
+                    <Typography variant="body1" sx={{ fontWeight: 500 }}>
+                      Email
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      contacto@grupomilkasa.com
+                    </Typography>
+                  </Box>
+                </Box>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <LocationOn sx={{ color: '#1976d2', mr: 2 }} />
+                  <Box>
+                    <Typography variant="body1" sx={{ fontWeight: 500 }}>
+                      Dirección
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      León, Guanajuato, México
+                    </Typography>
+                  </Box>
+                </Box>
+              </Box>
+            </Grid>
             
-            <Grid container spacing={4}>
-              <Grid item xs={12} md={6}>
-                <Box sx={{ mb: 3 }}>
-                  <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 2, color: '#2c3e50' }}>
-                    Información de contacto
-                  </Typography>
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                    <Phone sx={{ mr: 2, color: '#3498db' }} />
-                    <Typography>477 449 5983 / 477 284 9821</Typography>
-                  </Box>
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                    <Email sx={{ mr: 2, color: '#3498db' }} />
-                    <Typography>contacto@grupomilkasa.com</Typography>
-                  </Box>
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <LocationOn sx={{ mr: 2, color: '#3498db' }} />
-                    <Typography>León, Guanajuato, México</Typography>
-                  </Box>
-                </Box>
-              </Grid>
-              
-              <Grid item xs={12} md={6}>
-                <Box component="form" sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                  <TextField
-                    label="Nombre"
-                    variant="outlined"
-                    fullWidth
-                    required
-                  />
-                  <TextField
-                    label="Email"
-                    type="email"
-                    variant="outlined"
-                    fullWidth
-                    required
-                  />
-                  <TextField
-                    label="Teléfono"
-                    variant="outlined"
-                    fullWidth
-                  />
-                  <TextField
-                    label="Mensaje"
-                    multiline
-                    rows={4}
-                    variant="outlined"
-                    fullWidth
-                    required
-                  />
-                  <Button
-                    variant="contained"
-                    size="large"
-                    sx={{
-                      bgcolor: '#3498db',
-                      '&:hover': {
-                        bgcolor: '#2980b9'
-                      },
-                      py: 1.5,
-                      fontSize: '1.1rem'
-                    }}
-                  >
-                    ENVIAR
-                  </Button>
-                </Box>
-              </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 3 }}>
+                Envíanos un Mensaje
+              </Typography>
+              <Box component="form" sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                <TextField
+                  label="Nombre completo"
+                  variant="outlined"
+                  fullWidth
+                  required
+                  size="small"
+                />
+                <TextField
+                  label="Correo electrónico"
+                  type="email"
+                  variant="outlined"
+                  fullWidth
+                  required
+                  size="small"
+                />
+                <TextField
+                  label="Teléfono"
+                  variant="outlined"
+                  fullWidth
+                  size="small"
+                />
+                <TextField
+                  label="Mensaje"
+                  multiline
+                  rows={4}
+                  variant="outlined"
+                  fullWidth
+                  required
+                  size="small"
+                />
+                <Button
+                  variant="contained"
+                  size="large"
+                  sx={{
+                    bgcolor: '#1976d2',
+                    '&:hover': {
+                      bgcolor: '#1565c0'
+                    },
+                    py: 1.5
+                  }}
+                >
+                  ENVIAR MENSAJE
+                </Button>
+              </Box>
             </Grid>
-          </Paper>
-        </Box>
+          </Grid>
+        </Paper>
 
       </Container>
     </Box>
