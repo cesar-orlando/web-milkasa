@@ -13,16 +13,17 @@ function App() {
   return (
     <>
       <Navbar />
-      <Container sx={{ mt: 4, mb: 4 }}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/nosotros" element={<About />} />
-          <Route path="/propiedades" element={<Properties />} />
-          <Route path="/servicios" element={<Services />} />
-          <Route path="/contacto" element={<Contact />} />
-          <Route path="/propiedades/:id" element={<PropertyDetails />} />
-        </Routes>
-      </Container>
+      {/* Remove Container to allow full-bleed content */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/nosotros" element={<About />} />
+        <Route path="/propiedades" element={<Properties />} />
+        <Route path="/venta" element={<Properties />} />
+        <Route path="/renta" element={<Properties />} />
+        <Route path="/servicios" element={<Services />} />
+        <Route path="/contacto" element={<Contact />} />
+        <Route path="/propiedades/:id" element={<PropertyDetails />} />
+      </Routes>
       <Footer />
     </>
   );
