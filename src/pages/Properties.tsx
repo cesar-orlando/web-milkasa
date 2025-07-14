@@ -1,33 +1,9 @@
 // 📁 src/pages/Properties.tsx
-import { Box, Typography, Container, Card, CardMedia, CardContent, CardActions, Button } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import { useProperties } from "../hooks/useProperties";
 import PrimaryButton from "../components/PrimaryButton";
-import OutlinedButton from "../components/OutlinedButton";
 import LoaderLottie from "../components/LoaderLottie";
-import { useState } from "react";
-
-interface PropertyData {
-  titulo: string;
-  descripcio_n: string;
-  precio: number;
-  archivos: string | string[];
-  direccio_n: string;
-  taman_o: string;
-  tipo: string;
-  operacio_n: string;
-  ciudad: string;
-  estado: string;
-  recamaras: number;
-  ban_os: number;
-  estatus: string;
-  descripcion?: string; // Added for new structure
-}
-
-interface Property {
-  _id: string;
-  data: PropertyData;
-}
 
 const Properties = () => {
   const [searchParams] = useSearchParams();
@@ -59,13 +35,6 @@ const Properties = () => {
   let pageTitle = "Propiedades disponibles";
   if (location.pathname === "/venta") pageTitle = "Propiedades en Venta";
   if (location.pathname === "/renta") pageTitle = "Propiedades en Renta";
-
-  const formatCurrency = (val: string) =>
-    Number(val).toLocaleString("es-MX", {
-      style: "currency",
-      currency: "MXN",
-      maximumFractionDigits: 0,
-    });
 
   // Hero visual
   const heroBg =
@@ -149,7 +118,7 @@ const Properties = () => {
           </Box>
         ) : (
           <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr", md: "1fr 1fr 1fr" }, gap: 4 }}>
-            {filteredProperties.map((record, idx) => {
+            {filteredProperties.map((record) => {
               const rawArchivos = record.data.archivos;
               let imageUrl = Array.isArray(rawArchivos)
                 ? rawArchivos[0]

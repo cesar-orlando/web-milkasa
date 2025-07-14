@@ -8,7 +8,6 @@ import {
   Button,
   Divider,
   Stack,
-  Grid,
 } from "@mui/material";
 import { useState } from "react";
 import LoaderLottie from "../components/LoaderLottie";
@@ -22,17 +21,6 @@ import ChairIcon from '@mui/icons-material/Chair';
 import ShowerIcon from '@mui/icons-material/Shower';
 import WeekendIcon from '@mui/icons-material/Weekend';
 import StraightenIcon from '@mui/icons-material/Straighten';
-
-const fichaIcons = [
-  { icon: DirectionsCarIcon, label: "Garaje(s)", key: "garaje", valueKey: "garaje" },
-  { icon: HomeWorkIcon, label: "Niveles", key: "niveles", valueKey: "niveles" },
-  { icon: BedIcon, label: "Habitaciones", key: "recamaras", valueKey: "recamaras" },
-  { icon: KitchenIcon, label: "Cocina(s)", key: "cocinas", valueKey: "cocinas" },
-  { icon: ChairIcon, label: "Comedor(es)", key: "comedores", valueKey: "comedores" },
-  { icon: ShowerIcon, label: "Baños", key: "ban_os", valueKey: "ban_os" },
-  { icon: WeekendIcon, label: "Sala(s)", key: "salas", valueKey: "salas" },
-  { icon: StraightenIcon, label: "Medidas", key: "taman_o", valueKey: "taman_o" },
-];
 
 const PropertyDetails = () => {
   const { id } = useParams();
@@ -162,7 +150,7 @@ const PropertyDetails = () => {
           </Typography>
           <Divider sx={{ mb: 4, borderColor: '#7c3aed', borderBottomWidth: 3, width: 60 }} />
           <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 3 }}>
-            {ficha.map((item, i) => (
+            {ficha.map((item) => (
               <Box key={item.label} sx={{ textAlign: 'center', minWidth: 110, mb: 2 }}>
                 <item.icon sx={{ color: '#26c6da', fontSize: 38, mb: 1 }} />
                 <Typography fontWeight={700} color="#222" fontSize={18}>{item.value}</Typography>

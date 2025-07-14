@@ -1,4 +1,4 @@
-import { Box, Typography, Button, Container, Stack } from "@mui/material";
+import { Box, Typography, Button, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import LoaderLottie from "../components/LoaderLottie";
 import { useProperties } from "../hooks/useProperties";
