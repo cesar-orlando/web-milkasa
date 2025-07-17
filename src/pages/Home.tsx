@@ -259,14 +259,6 @@ const Home = () => {
         <Typography color="#222" textAlign="center" maxWidth={700} mx="auto" mb={6}>
           En <b>Grupo Milkasa</b> te ofrecemos asesoría profesional y acompañamiento personalizado para que tomes la mejor decisión en tu inversión inmobiliaria.
         </Typography>
-        {/* Bloques coloridos decorativos */}
-        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mt: 6 }}>
-          <Box sx={{ width: 60, height: 60, bgcolor: '#ffb13b', borderRadius: 2 }} />
-          <Box sx={{ width: 60, height: 60, bgcolor: '#e91e63', borderRadius: 2 }} />
-          <Box sx={{ width: 60, height: 60, bgcolor: '#7c3aed', borderRadius: 2 }} />
-          <Box sx={{ width: 60, height: 60, bgcolor: '#26c6da', borderRadius: 2 }} />
-          <Box sx={{ width: 60, height: 60, bgcolor: '#43a047', borderRadius: 2 }} />
-        </Box>
       </Box>
       {/* Animación del cursor */}
       <style>{`
