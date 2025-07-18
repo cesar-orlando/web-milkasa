@@ -8,8 +8,11 @@ import {
   Button,
   Divider,
   Stack,
+  TextField,
+  Alert,
 } from "@mui/material";
 import { useState } from "react";
+import axios from "axios";
 import LoaderLottie from "../components/LoaderLottie";
 import ContactSuccess from "../components/ContactSuccess";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -22,12 +25,34 @@ import ShowerIcon from '@mui/icons-material/Shower';
 import WeekendIcon from '@mui/icons-material/Weekend';
 import StraightenIcon from '@mui/icons-material/Straighten';
 
+// Types for API requests
+interface CreateRecordRequest {
+  tableSlug: string;
+  data: Record<string, any>;
+  c_name: string;
+  createdBy: string;
+}
+
+// API function to create records
+const createRecord = async (recordData: CreateRecordRequest) => {
+  try {
+    const response = await axios.post('https://api-virtual-voices.onrender.com/api/records/', recordData);
+    return response.data;
+  } catch (error) {
+    console.error('Error creating record:', error);
+    throw new Error('No se pudo crear el registro');
+  }
+};
+
 const PropertyDetails = () => {
   const { id } = useParams();
   const { properties, loading } = useProperties();
   // TODOS LOS HOOKS VAN AQUÍ
   const [mainImgIdx, setMainImgIdx] = useState(0);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [form, setForm] = useState({ nombre: '', email: '', telefono: '', mensaje: '' });
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const property = properties.find((p) => p._id === id);
 
@@ -56,6 +81,73 @@ const PropertyDetails = () => {
 
   // Mapa embed (mock)
   const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(property.data.direccio_n || property.data.ciudad || "Uruapan, Michoacán")}&output=embed`;
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+    // Clear error when user starts typing
+    if (error) setError(null);
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    // Validate required fields
+    const requiredFields = ['nombre', 'email', 'mensaje'];
+    const missing: string[] = [];
+    
+    requiredFields.forEach(field => {
+      const value = form[field as keyof typeof form];
+      if (!value || (typeof value === 'string' && value.trim() === '')) {
+        missing.push(field);
+      }
+    });
+
+    if (missing.length > 0) {
+      setError(`Faltan campos requeridos: ${missing.map(field => {
+        const labels: Record<string, string> = {
+          nombre: 'Nombre',
+          email: 'Email',
+          mensaje: 'Mensaje'
+        };
+        return labels[field] || field;
+      }).join(', ')}`);
+      return;
+    }
+
+    try {
+      setSubmitting(true);
+      setError(null);
+
+      // Prepare data for API
+      const recordData: CreateRecordRequest = {
+        tableSlug: 'pagina-web',
+        data: {
+          nombre: form.nombre.trim(),
+          email: form.email.trim(),
+          telefono: form.telefono.trim() || '',
+          mensaje: form.mensaje.trim(),
+          fecha_contacto: new Date().toISOString(),
+          origen: 'formulario_propiedad',
+          propiedad_id: property._id,
+          propiedad_titulo: property.data.titulo,
+          propiedad_precio: property.data.precio
+        },
+        c_name: 'grupo-milkasa',
+        createdBy: 'web-property-contact'
+      };
+
+      // Create record in API
+      await createRecord(recordData);
+      
+      // Show success message
+      setShowSuccess(true);
+    } catch (err) {
+      setError('Error al enviar el mensaje. Por favor intenta nuevamente.');
+      console.error('Error submitting form:', err);
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <Box sx={{ bgcolor: "#fff", minHeight: "100vh" }}>
@@ -207,15 +299,70 @@ const PropertyDetails = () => {
                 {showSuccess ? (
                   <ContactSuccess />
                 ) : (
-                  <Stack spacing={2}>
-                    <input placeholder="Nombre" style={{ width: '100%', padding: 12, borderRadius: 6, border: '1px solid #ccc' }} />
-                    <input placeholder="Email" style={{ width: '100%', padding: 12, borderRadius: 6, border: '1px solid #ccc' }} />
-                    <input placeholder="Teléfono" style={{ width: '100%', padding: 12, borderRadius: 6, border: '1px solid #ccc' }} />
-                    <textarea placeholder={`Hola, quisiera más información de ${property.data.titulo}. Gracias!`} rows={3} style={{ width: '100%', padding: 12, borderRadius: 6, border: '1px solid #ccc', resize: 'vertical' }} />
-                    <Button variant="contained" sx={{ bgcolor: '#e91e63', fontWeight: 700, fontSize: 18 }} fullWidth onClick={() => setShowSuccess(true)}>
-                      ENVIAR
-                    </Button>
-                  </Stack>
+                  <form onSubmit={handleSubmit}>
+                    <Stack spacing={2}>
+                      {error && (
+                        <Alert severity="error">
+                          {error}
+                        </Alert>
+                      )}
+                      <TextField 
+                        label="Nombre" 
+                        name="nombre" 
+                        value={form.nombre} 
+                        onChange={handleChange} 
+                        required 
+                        fullWidth 
+                        error={!!(error && error.includes('Nombre'))}
+                      />
+                      <TextField 
+                        label="Email" 
+                        name="email" 
+                        value={form.email} 
+                        onChange={handleChange} 
+                        required 
+                        fullWidth 
+                        type="email" 
+                        error={!!(error && error.includes('Email'))}
+                      />
+                      <TextField 
+                        label="Teléfono" 
+                        name="telefono" 
+                        value={form.telefono} 
+                        onChange={handleChange} 
+                        fullWidth 
+                      />
+                      <TextField 
+                        label="Mensaje" 
+                        name="mensaje" 
+                        value={form.mensaje} 
+                        onChange={handleChange} 
+                        required 
+                        fullWidth 
+                        multiline 
+                        rows={3} 
+                        placeholder={`Hola, quisiera más información de ${property.data.titulo}. Gracias!`}
+                        error={!!(error && error.includes('Mensaje'))}
+                      />
+                      <Button 
+                        type="submit" 
+                        variant="contained" 
+                        sx={{ 
+                          bgcolor: '#e91e63', 
+                          color: '#fff',
+                          fontWeight: 700, 
+                          fontSize: 18,
+                          '&:hover': {
+                            bgcolor: '#c2185b'
+                          }
+                        }} 
+                        fullWidth 
+                        disabled={submitting}
+                      >
+                        {submitting ? 'Enviando...' : 'ENVIAR'}
+                      </Button>
+                    </Stack>
+                  </form>
                 )}
               </Paper>
             </Box>

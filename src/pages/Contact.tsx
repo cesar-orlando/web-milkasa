@@ -1,23 +1,95 @@
-import { Box, Typography, Container, Paper, Stack, Button, TextField } from '@mui/material';
+import { Box, Typography, Container, Paper, Stack, Button, TextField, Alert } from '@mui/material';
 import { useState } from 'react';
+import axios from 'axios';
 import ContactSuccess from '../components/ContactSuccess';
+
+// Types for API requests
+interface CreateRecordRequest {
+  tableSlug: string;
+  data: Record<string, any>;
+  c_name: string;
+  createdBy: string;
+}
+
+// API function to create records
+const createRecord = async (recordData: CreateRecordRequest) => {
+  try {
+    const response = await axios.post('https://api-virtual-voices.onrender.com/api/records/', recordData);
+    return response.data;
+  } catch (error) {
+    console.error('Error creating record:', error);
+    throw new Error('No se pudo crear el registro');
+  }
+};
 
 const Contact = () => {
   const [form, setForm] = useState({ nombre: '', email: '', telefono: '', mensaje: '' });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    // Clear error when user starts typing
+    if (error) setError(null);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitting(true);
-    setTimeout(() => {
+    
+    // Validate required fields
+    const requiredFields = ['nombre', 'email', 'mensaje'];
+    const missing: string[] = [];
+    
+    requiredFields.forEach(field => {
+      const value = form[field as keyof typeof form];
+      if (!value || (typeof value === 'string' && value.trim() === '')) {
+        missing.push(field);
+      }
+    });
+
+    if (missing.length > 0) {
+      setError(`Faltan campos requeridos: ${missing.map(field => {
+        const labels: Record<string, string> = {
+          nombre: 'Nombre',
+          email: 'Email',
+          mensaje: 'Mensaje'
+        };
+        return labels[field] || field;
+      }).join(', ')}`);
+      return;
+    }
+
+    try {
+      setSubmitting(true);
+      setError(null);
+
+      // Prepare data for API
+      const recordData: CreateRecordRequest = {
+        tableSlug: 'pagina-web',
+        data: {
+          nombre: form.nombre.trim(),
+          email: form.email.trim(),
+          telefono: form.telefono.trim() || '',
+          mensaje: form.mensaje.trim(),
+          fecha_contacto: new Date().toISOString(),
+          origen: 'formulario_contacto'
+        },
+        c_name: 'grupo-milkasa',
+        createdBy: 'web-contact'
+      };
+
+      // Create record in API
+      await createRecord(recordData);
+      
+      // Show success message
       setSubmitted(true);
+    } catch (err) {
+      setError('Error al enviar el mensaje. Por favor intenta nuevamente.');
+      console.error('Error submitting form:', err);
+    } finally {
       setSubmitting(false);
-    }, 1000);
+    }
   };
 
   return (
@@ -66,16 +138,73 @@ const Contact = () => {
           <Typography color="#757575" mb={3} textAlign="center">
             ¿Tienes dudas o quieres agendar una cita? Completa el formulario y te contactamos a la brevedad.
           </Typography>
+          
+          {error && (
+            <Alert severity="error" sx={{ mb: 3 }}>
+              {error}
+            </Alert>
+          )}
+          
           {submitted ? (
             <ContactSuccess />
           ) : (
             <form onSubmit={handleSubmit}>
               <Stack spacing={2}>
-                <TextField label="Nombre" name="nombre" value={form.nombre} onChange={handleChange} required fullWidth />
-                <TextField label="Email" name="email" value={form.email} onChange={handleChange} required fullWidth type="email" />
-                <TextField label="Teléfono" name="telefono" value={form.telefono} onChange={handleChange} fullWidth />
-                <TextField label="Mensaje" name="mensaje" value={form.mensaje} onChange={handleChange} required fullWidth multiline rows={4} />
-                <Button type="submit" variant="contained" sx={{ bgcolor: '#e91e63', color: '#fff', fontWeight: 700, borderRadius: 2, px: 5, py: 1.5, fontSize: 18, boxShadow: 2 }} disabled={submitting}>
+                <TextField 
+                  label="Nombre" 
+                  name="nombre" 
+                  value={form.nombre} 
+                  onChange={handleChange} 
+                  required 
+                  fullWidth 
+                  error={!!(error && error.includes('Nombre'))}
+                />
+                <TextField 
+                  label="Email" 
+                  name="email" 
+                  value={form.email} 
+                  onChange={handleChange} 
+                  required 
+                  fullWidth 
+                  type="email" 
+                  error={!!(error && error.includes('Email'))}
+                />
+                <TextField 
+                  label="Teléfono" 
+                  name="telefono" 
+                  value={form.telefono} 
+                  onChange={handleChange} 
+                  fullWidth 
+                />
+                <TextField 
+                  label="Mensaje" 
+                  name="mensaje" 
+                  value={form.mensaje} 
+                  onChange={handleChange} 
+                  required 
+                  fullWidth 
+                  multiline 
+                  rows={4} 
+                  error={!!(error && error.includes('Mensaje'))}
+                />
+                <Button 
+                  type="submit" 
+                  variant="contained" 
+                  sx={{ 
+                    bgcolor: '#e91e63', 
+                    color: '#fff', 
+                    fontWeight: 700, 
+                    borderRadius: 2, 
+                    px: 5, 
+                    py: 1.5, 
+                    fontSize: 18, 
+                    boxShadow: 2,
+                    '&:hover': {
+                      bgcolor: '#c2185b'
+                    }
+                  }} 
+                  disabled={submitting}
+                >
                   {submitting ? 'Enviando...' : 'Enviar'}
                 </Button>
               </Stack>
@@ -86,4 +215,5 @@ const Contact = () => {
     </Box>
   );
 }
+
 export default Contact;

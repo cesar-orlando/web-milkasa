@@ -190,12 +190,40 @@ const Home = () => {
 
       {/* Cards de propiedades reales */}
       <Box sx={{ bgcolor: '#fff', py: 8 }}>
-        <Typography variant="h3" fontWeight={900} color="#7c3aed" textAlign="center" gutterBottom sx={{ mb: 4 }}>
-          Propiedades
+        <Typography variant="h3" fontWeight={900} color="#222" textAlign="center" gutterBottom sx={{ mb: 4 }}>
+          <span style={{ color: '#ffb13b' }}>Propiedades</span>
         </Typography>
         <Stack direction="row" spacing={2} justifyContent="center" sx={{ mb: 4, flexWrap: 'wrap' }}>
           {['Todas', 'Bodega', 'Casa', 'Departamento', 'Local', 'Oficinas', 'Terreno'].map((cat, i) => (
-            <Box key={cat} sx={{ bgcolor: ['#e91e63','#26c6da','#43a047','#ffb13b','#7c3aed','#8e24aa','#fbc02d'][i], color: '#fff', fontWeight: 700, px: 3, py: 1, borderRadius: 2, fontSize: 18, mb: 1 }}>
+            <Box key={cat} sx={{ 
+              background: i === 0 
+                ? 'linear-gradient(135deg, #ea580c 0%, #f97316 50%, #fb923c 100%)'
+                : i === 1 
+                ? 'linear-gradient(135deg, #dc2626 0%, #ea580c 50%, #f97316 100%)'
+                : i === 2 
+                ? 'linear-gradient(135deg, #b45309 0%, #d97706 50%, #ea580c 100%)'
+                : i === 3 
+                ? 'linear-gradient(135deg, #92400e 0%, #b45309 50%, #d97706 100%)'
+                : i === 4 
+                ? 'linear-gradient(135deg, #f97316 0%, #fb923c 50%, #fdba74 100%)'
+                : i === 5 
+                ? 'linear-gradient(135deg, #ea580c 0%, #f97316 50%, #fb923c 100%)'
+                : 'linear-gradient(135deg, #d97706 0%, #ea580c 50%, #f97316 100%)',
+              color: '#fff', 
+              fontWeight: 700, 
+              px: 3, 
+              py: 1, 
+              borderRadius: 2, 
+              fontSize: 18, 
+              mb: 1,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+              transition: 'all 0.3s ease',
+              '&:hover': {
+                transform: 'translateY(-2px)',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.25)',
+                filter: 'brightness(1.1)'
+              }
+            }}>
               {cat}
             </Box>
           ))}
@@ -224,8 +252,25 @@ const Home = () => {
                       + INFO
                     </Button>
                   </Box>
-                  {/* Decorativo colorido */}
-                  <Box sx={{ position: 'absolute', right: 0, bottom: 0, width: 60, height: 60, bgcolor: ['#ffb13b','#7c3aed','#e91e63','#26c6da','#43a047','#8e24aa'][parseInt(record._id)%6], borderTopLeftRadius: 60, zIndex: 1, opacity: 0.7 }} />
+                  {/* Decorativo naranja degradado */}
+                  <Box sx={{ 
+                    position: 'absolute', 
+                    right: 0, 
+                    bottom: 0, 
+                    width: 60, 
+                    height: 60, 
+                    background: [
+                      'linear-gradient(135deg, #ea580c 0%, #f97316 100%)',
+                      'linear-gradient(135deg, #b45309 0%, #d97706 100%)',
+                      'linear-gradient(135deg, #92400e 0%, #b45309 100%)',
+                      'linear-gradient(135deg, #f97316 0%, #fb923c 100%)',
+                      'linear-gradient(135deg, #d97706 0%, #ea580c 100%)',
+                      'linear-gradient(135deg, #fb923c 0%, #fdba74 100%)'
+                    ][parseInt(record._id)%6], 
+                    borderTopLeftRadius: 60, 
+                    zIndex: 1, 
+                    opacity: 0.7 
+                  }} />
                 </Box>
               );
             })}
